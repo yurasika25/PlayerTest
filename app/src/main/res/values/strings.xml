@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MusicPlayer</string>
+    <string name="on">Дозвіл надано!</string>
+    <string name="off">Дозвіл відмовлено!</string>
+</resources>
