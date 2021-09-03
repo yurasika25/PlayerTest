@@ -1,22 +1,24 @@
 package com.example.musicplayer.main
 
+import android.Manifest
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.musicplayer.R
-import com.example.musicplayer.adapter.AdapterMainList
 import com.example.musicplayer.adapter.AdapterHorizontalList
-import com.example.musicplayer.data.MusicModel
+import com.example.musicplayer.adapter.AdapterMainList
 import com.example.musicplayer.data.MusicHorizontalModel
-import com.example.musicplayer.utils.STORAGE_PERMISSION_CODE
+import com.example.musicplayer.data.MusicModel
 import com.example.musicplayer.utils.appMainActivity
-import com.example.musicplayer.utils.requestStoragePermission
+import com.example.musicplayer.utils.checkPermissionCode
 import com.example.musicplayer.utils.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    val PERMISSION_READ = 0
 
     private var adapterMusic = AdapterMainList()
     private var adapterMusicTwo = AdapterHorizontalList()
@@ -25,10 +27,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         appMainActivity = this
-        requestStoragePermission()
-        initFun()
-        initFunTwo()
-        funClick()
+        if (checkPermissionCode()){
+            initFun()
+            initFunTwo()
+            funClick()
+        }
     }
     private fun funClick() {
         float_right.setOnClickListener {
@@ -51,9 +54,7 @@ class MainActivity : AppCompatActivity() {
         rc_view_music_two.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         adapterMusicTwo.addAllItemsTwo(listMainTwo)
-
     }
-
 
     private fun initFun() {
         val listMain = arrayListOf<MusicModel>()
@@ -74,11 +75,17 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == STORAGE_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showToast("Дозвіл надано!")
-            } else {
-                showToast("Дозвіл відмовлено!")
+        when (requestCode) {
+            appMainActivity.PERMISSION_READ -> {
+                if (grantResults.isNotEmpty() && permissions[0] == Manifest.permission.READ_EXTERNAL_STORAGE) {
+                    if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                        showToast("Будь ласка, надайте дозвіл на зберігання та читання Медіа файлів")
+                    } else {
+                        initFun()
+                        initFunTwo()
+                        funClick()
+                    }
+                }
             }
         }
     }
