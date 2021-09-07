@@ -2,24 +2,28 @@ package com.example.musicplayer.utils
 
 import android.Manifest
 import android.content.pm.PackageManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import com.example.musicplayer.fragment.FragmentMainList
 
-fun checkPermissionCode(): Boolean {
-    val READ_EXTERNAL_PERMISSION: Int =
-        ContextCompat.checkSelfPermission(
-            appMainActivity,
+fun checkReadSongsPermission(activity: AppCompatActivity) {
+    if (activity.checkSelfPermission(
             Manifest.permission.READ_EXTERNAL_STORAGE
-        )
-    if (READ_EXTERNAL_PERMISSION != PackageManager.PERMISSION_GRANTED) {
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
         ActivityCompat.requestPermissions(
-            appMainActivity,
-            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-            appMainActivity.PERMISSION_READ
+            activity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 111
         )
-        return false
+    } else {
+        activity.replaceFragment(FragmentMainList(), false)
     }
-    return true
 }
 
-
+fun onReadSongsPermissionResult(activity: AppCompatActivity) {
+    if (activity.checkSelfPermission(
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+    ) {
+        activity.replaceFragment(FragmentMainList(), false)
+    }
+}

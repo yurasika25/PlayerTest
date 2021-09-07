@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginStart="6dp"
+    android:layout_marginTop="6dp">
 
     <TextView
         android:id="@+id/name_song_main_list"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:textColor="@color/black"
         android:textSize="17sp"
         android:maxLines="1"
@@ -58,21 +58,20 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view_image"
         android:layout_width="wrap_content"
-        android:layout_margin="3dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="2dp"
+        app:cardCornerRadius="6dp"
+        android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_main_list"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/im_item"
             android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/im_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

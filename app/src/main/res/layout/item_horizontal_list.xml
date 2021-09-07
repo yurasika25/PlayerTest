@@ -3,21 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@color/color_background">
 
     <TextView
         android:id="@+id/name_song_horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/raleway_semibold"
+        android:gravity="center"
+        android:maxLines="2"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:fontFamily="@font/raleway_semibold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/card_view_image"
@@ -27,17 +28,15 @@
         android:id="@+id/name_group_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:gravity="center"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="14dp"
+        android:ellipsize="end"
         android:fontFamily="@font/raleway_semibold"
-        android:layout_marginBottom="10dp"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_song_horizontal"
@@ -49,8 +48,8 @@
         android:id="@+id/card_view_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="38dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -58,12 +57,13 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_horizontal"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/im_fon"
+            android:src="@drawable/im_background"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck" />
 
     </com.google.android.material.card.MaterialCardView>
 
