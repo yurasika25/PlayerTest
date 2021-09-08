@@ -30,8 +30,14 @@ class AdapterMaiList : RecyclerView.Adapter<AdapterMaiList.HolderClass>() {
             mr.setDataSource(song.SongUrl)
             val data = mr.embeddedPicture ?: ByteArray(0)
             mr.release()
-            holder.itemView.image_main_list.setImageBitmap(BitmapFactory. decodeByteArray(data, 0, data.size))
-        } catch (error:Throwable) {
+            holder.itemView.image_main_list.setImageBitmap(
+                BitmapFactory.decodeByteArray(
+                    data,
+                    0,
+                    data.size
+                )
+            )
+        } catch (error: Throwable) {
             holder.itemView.image_main_list.setImageBitmap(null)
             error.printStackTrace()
         }

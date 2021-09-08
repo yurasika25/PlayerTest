@@ -72,11 +72,10 @@ class FragmentMainList : Fragment(R.layout.fragment_main_list) {
     }
 
     private fun displayVerticalSongs() {
+        listSongs.shuffle()
         val adapter = AdapterMaiList()
         rv_main.adapter = adapter
-        listSongs.forEach { _ ->
-            adapter.addAllSongs(mutableListOf(listSongs.random()))
-        }
+        adapter.addAllSongs(listSongs)
         rv_main.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         checkSongsEmpty()
 
@@ -89,9 +88,8 @@ class FragmentMainList : Fragment(R.layout.fragment_main_list) {
 
     private fun displayHorizontalSongs() {
         val adapter = AdapterHorizontalList()
-        listSongs.forEach { _ ->
-            adapter.addAllSongsHorizontal(mutableListOf(listSongs.random()))
-        }
+        listSongs.shuffle()
+        adapter.addAllSongsHorizontal(listSongs)
         rv_main.adapter = adapter
         rv_main.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
