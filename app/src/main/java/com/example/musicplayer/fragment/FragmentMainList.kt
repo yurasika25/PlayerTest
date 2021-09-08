@@ -7,6 +7,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -15,7 +17,6 @@ import com.example.musicplayer.R
 import com.example.musicplayer.adapter.AdapterHorizontalList
 import com.example.musicplayer.adapter.AdapterMaiList
 import com.example.musicplayer.data.SongInformation
-import com.example.musicplayer.utils.showToast
 import kotlinx.android.synthetic.main.fragment_main_list.*
 
 class FragmentMainList : Fragment(R.layout.fragment_main_list) {
@@ -72,17 +73,28 @@ class FragmentMainList : Fragment(R.layout.fragment_main_list) {
 
     private fun displayVerticalSongs() {
         val adapter = AdapterMaiList()
-        adapter.addAllSongs(listSongs)
         rv_main.adapter = adapter
+        listSongs.forEach { _ ->
+            adapter.addAllSongs(mutableListOf(listSongs.random()))
+        }
         rv_main.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         checkSongsEmpty()
+
+        val resId: Int = R.anim.layout_animation_fall_down
+        val animation: LayoutAnimationController =
+            AnimationUtils.loadLayoutAnimation(requireContext(), resId)
+        rv_main.layoutAnimation = animation
+
     }
 
     private fun displayHorizontalSongs() {
         val adapter = AdapterHorizontalList()
-        adapter.addAllSongsHorizontal(listSongs)
+        listSongs.forEach { _ ->
+            adapter.addAllSongsHorizontal(mutableListOf(listSongs.random()))
+        }
         rv_main.adapter = adapter
-        rv_main.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        rv_main.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         checkSongsEmpty()
     }
 
